@@ -26,12 +26,12 @@ const Header = () => {
       </div>
 
      
-      <div className="bg-white sticky top-0 z-50 shadow-md px-4 py-3 flex justify-between items-center">
+      <div className="bg-white  sticky top-0 z-50 shadow-md px-1 py-3 flex md:justify-between lg:px-5 justify-around items-center">
         {/* Logo */}
         <img src="/irahi-logo (2).png" className="md:h-14 h-9 cursor-pointer" alt="Logo" onClick={() => navigate("/")} />
 
       
-        <div className="flex text-xs gap-2 md:text-lg items-center md:gap-6">
+        <div className="flex text-[10px] justify-center gap-3 md:text-base items-center md:gap-6">
           {menuItems.map((item) => (
             <li
               key={item.name}
@@ -45,7 +45,7 @@ const Header = () => {
             </li>
           ))}
 
-          <button className="bg-[#F59E0B] text-xs px-2 py-2 rounded-lg text-white">
+          <button className="bg-[#F59E0B] w-16 text-[9px] font-medium md:w-32 md:text-base md:px-2  py-2 rounded-lg text-white">
             Get Started
           </button>
         </div>
