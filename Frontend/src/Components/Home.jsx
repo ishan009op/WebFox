@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import CardsOverlay from './Overlay.jsx';
 import TextImageSection from './Slides.jsx';
+import Services from './Services.jsx';
 
 const Home = () => {
   return (
@@ -15,7 +16,7 @@ const Home = () => {
         <button className='bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 rounded-full py-3 px-5 text-xs font-medium text-slate-100'>Book a Consultant</button>
         </div>
       </div>
-      
+      <Services/>
     </>
   );
 };
