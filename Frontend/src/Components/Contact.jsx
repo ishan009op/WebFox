@@ -21,14 +21,14 @@ const Contact = () => {
       const res = await axios.post("https://webfox-ue5o.onrender.com/api/user", {
         name: Name,
         email: Email,
-        description: Desc // Add this if your backend expects it
+        
       });
 
       // Success!
       alert("Message sent successfully!");
       SetName('');
       SetEmail('');
-      SetDesc('');
+      
       console.log(res.data);
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -102,14 +102,7 @@ const Contact = () => {
                        px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
           />
 
-          <textarea
-            value={Desc}
-            onChange={(e) => SetDesc(e.target.value)}
-            placeholder="Your Message (optional)"
-            rows="4"
-            className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
-                       px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
-          />
+          
 
           <motion.button
             type="submit"
