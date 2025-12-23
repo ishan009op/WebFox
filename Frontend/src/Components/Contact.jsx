@@ -3,31 +3,41 @@ import { motion } from "framer-motion";
 import axios from "axios";
 
 const Contact = () => {
+  const [Name, SetName] = useState('');
+  const [Email, SetEmail] = useState('');
+  const [Desc, SetDesc] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const[Name,SetName]=useState('')
-  const[Email,SetEmail]=useState('')
-  const[Desc,SetDesc]=useState('')
+  const addContact = async (e) => {
+    e.preventDefault();
 
-const addContact=async(e)=>{
+    if (!Name || !Email) {
+      alert("Please fill all required fields");
+      return;
+    }
 
-e.preventDefault();
+    try {
+      setLoading(true);
+      const res = await axios.post("https://webfox-ue5o.onrender.com/api/user", {
+        name: Name,
+        email: Email,
+        description: Desc // Add this if your backend expects it
+      });
 
-  if (!Name || !Email || !Desc) {
-    alert("Please fill all required fields");
-    return;
-  }
+      // Success!
+      alert("Message sent successfully!");
+      SetName('');
+      SetEmail('');
+      SetDesc('');
+      console.log(res.data);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Failed to send message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const res=await axios.post("https://webfox-ue5o.onrender.com/api/user",{
-name:Name,
-email:Email,
-
-  },)
-
-SetName('')
-SetEmail('')
-
-  console.log(res.data)
-}
   return (
     <section
       id="contact"
@@ -47,12 +57,12 @@ SetEmail('')
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl md:text-4xl font-bold text-white">
-            Let’s Build Something{" "}
+            Let's Build Something{" "}
             <span className="text-amber-400">Meaningful</span>
           </h2>
 
           <p className="mt-4 text-slate-300 text-sm md:text-base max-w-md">
-            Tell us about your business, idea, or project. We’ll help you turn
+            Tell us about your business, idea, or project. We'll help you turn
             it into a strong brand and a high-impact presence.
           </p>
 
@@ -65,7 +75,7 @@ SetEmail('')
 
         {/* Right form */}
         <motion.form
-        onSubmit={addContact}
+          onSubmit={addContact} // ✅ Changed from action to onSubmit
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -75,31 +85,42 @@ SetEmail('')
           <input
             type="text"
             value={Name}
-            onChange={(e)=>SetName(e.target.value)}
+            onChange={(e) => SetName(e.target.value)}
             placeholder="Your Name"
+            required
             className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
                        px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
           />
 
           <input
             type="email"
-             value={Email}
-            onChange={(e)=>SetEmail(e.target.value)}
+            value={Email}
+            onChange={(e) => SetEmail(e.target.value)}
             placeholder="Email Address"
+            required
             className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
                        px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
           />
 
-          
+          <textarea
+            value={Desc}
+            onChange={(e) => SetDesc(e.target.value)}
+            placeholder="Your Message (optional)"
+            rows="4"
+            className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
+                       px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
+          />
 
           <motion.button
-          type="submit"
+            type="submit"
+            disabled={loading}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             className="w-full bg-amber-400 text-slate-900 font-semibold
-                       py-3 rounded-full hover:bg-amber-500 transition"
+                       py-3 rounded-full hover:bg-amber-500 transition
+                       disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Send Message
+            {loading ? "Sending..." : "Send Message"}
           </motion.button>
         </motion.form>
       </div>
