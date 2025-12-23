@@ -9,11 +9,12 @@ dotenv.config();
 const app = express();
 
 // ✅ Simple CORS - Allow all origins temporarily to test
-app.use(cors({
-  origin: '*', // Test with this first
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+// app.use(cors({
+//   origin: '*', // Test with this first
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization"]
+// }));
+app.use(cors())
 
 // Body parser
 app.use(express.json());
