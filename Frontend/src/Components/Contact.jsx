@@ -1,9 +1,83 @@
-import React from 'react'
+import React from "react";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   return (
-    <div>Contact</div>
-  )
-}
+    <section
+      id="contact"
+      className="relative mx-3 md:mx-10 my-10 md:my-20 rounded-3xl bg-slate-950 overflow-hidden scroll-mt-28"
+    >
+      {/* Background glow */}
+      <div className="absolute -top-24 -right-24 w-64 h-64 md:w-96 md:h-96 bg-indigo-500/30 blur-3xl rounded-full" />
+      <div className="absolute -bottom-24 -left-24 w-64 h-64 md:w-96 md:h-96 bg-amber-400/30 blur-3xl rounded-full" />
 
-export default Contact
+      <div className="relative px-6 md:px-20 py-14 md:py-20 grid md:grid-cols-2 gap-10 items-center">
+        
+        {/* Left content */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-2xl md:text-4xl font-bold text-white">
+            Let’s Build Something{" "}
+            <span className="text-amber-400">Meaningful</span>
+          </h2>
+
+          <p className="mt-4 text-slate-300 text-sm md:text-base max-w-md">
+            Tell us about your business, idea, or project. We’ll help you turn
+            it into a strong brand and a high-impact presence.
+          </p>
+
+          <div className="mt-6 space-y-3 text-slate-300 text-sm">
+            <p>📍 Location: Your City, India</p>
+            <p>📧 Email: hello@yourbrand.com</p>
+            <p>📞 Phone: +91 XXXXX XXXXX</p>
+          </div>
+        </motion.div>
+
+        {/* Right form */}
+        <motion.form
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="bg-slate-900/70 backdrop-blur-xl rounded-2xl p-6 md:p-8 space-y-4"
+        >
+          <input
+            type="text"
+            placeholder="Your Name"
+            className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
+                       px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
+          />
+
+          <input
+            type="email"
+            placeholder="Email Address"
+            className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
+                       px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
+          />
+
+          <textarea
+            rows="4"
+            placeholder="Tell us about your project..."
+            className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
+                       px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
+          />
+
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="w-full bg-amber-400 text-slate-900 font-semibold
+                       py-3 rounded-full hover:bg-amber-500 transition"
+          >
+            Send Message
+          </motion.button>
+        </motion.form>
+      </div>
+    </section>
+  );
+};
+
+export default Contact;

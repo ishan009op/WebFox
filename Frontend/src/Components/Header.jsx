@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 const menuItems = [
   { name: "Home", path: "/" },
-  { name: "Work", path: "/work" },
-  { name: "Services", path: "/services" },
-  { name: "About", path: "/about" },
-  { name: "Contact", path: "/contact" },
+  { name: "Work", path: "/#work" },
+  { name: "Services", path: "/#services" },
+  { name: "About", path: "/#about" },
+  { name: "Contact", path: "/#contact" },
 ];
 
 const Header = () => {
@@ -17,13 +17,13 @@ const Header = () => {
   return (
     <>
       {/* ================= TOP BAR ================= */}
-      <div className="min-w-screen bg-[#0F172A] flex flex-col md:flex-row justify-between items-center text-white px-4 md:px-10 py-2">
+      {/* <div className="min-w-screen bg-[#0F172A] flex flex-col md:flex-row justify-between items-center text-white px-4 md:px-10 py-2">
         <div className="flex gap-4 text-sm">
           <p>sales@gmail.com</p>
           <p>HR: 91+ 999-9999-999</p>
         </div>
         <p className="text-sm mt-2 md:mt-0">91+ 888-8888-888</p>
-      </div>
+      </div> */}
 
      
       <div className="bg-white  sticky top-0 z-50 shadow-md px-1 py-3 flex md:justify-between lg:px-5 justify-around items-center">
@@ -45,7 +45,7 @@ const Header = () => {
             </li>
           ))}
 
-          <button className="bg-[#F59E0B] w-16 text-[9px] font-medium md:w-32 md:text-base md:px-2  py-2 rounded-lg text-white">
+          <button className="bg-amber-400 w-16 text-[9px] font-medium md:w-32 md:text-base md:px-2  py-2 rounded-xl text-white">
             Get Started
           </button>
         </div>

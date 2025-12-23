@@ -1,22 +1,111 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { motion } from 'framer-motion';
-import CardsOverlay from './Overlay.jsx';
-import TextImageSection from './Slides.jsx';
+
+
 import Services from './Services.jsx';
+import UseScrollToHash from './UseScrollToHash.js'
+import About from './About.jsx';
+import Contact from './Contact.jsx';
+import ContactModal from './ContactModal.jsx';
 
 const Home = () => {
+
+  onst [open, setOpen] = useState(false);
+  const [source, setSource] = useState("");
+  UseScrollToHash()
   return (
     <>
-      <div className='bg-[url(/11230.jpg)] flex flex-col justify-center box-border h-screen my-2 mx-2 md:my-6 md:mx-10 rounded-3xl bg-blend-darken'>
-        <h1 className='bg-clip-text text-transparent bg-gradient-to-r from-blue-100 via-blue-200 to-blue-300 text-center text-2xl p-2 md:text-4xl font-bold my-8'>Creative Design & Marketing Solutions for Growing Businesses</h1>
 
-        <p className='text-slate-200 m-4 text-xs text-center'>From visual branding to digital & on-ground marketing — we help brands stand out and grow</p>
-<div className='flex gap-2 justify-between my-10 mx-auto'>
-        <button className='bg-gradient-to-r from-indigo-500 via-indigo-400 to-indigo-300 py-3 px-5 text-xs rounded-full font-medium text-slate-50'>Get Started </button>
-        <button className='bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 rounded-full py-3 px-5 text-xs font-medium text-slate-100'>Book a Consultant</button>
-        </div>
-      </div>
+
+
+    {/* <section className="relative mx-3 md:mx-10 my-4 md:my-6 rounded-3xl overflow-hidden">
+  
+  
+  <div className="absolute inset-0 bg-gradient-to-br 
+                  from-slate-950 via-slate-900 to-slate-800" />
+
+  
+
+  <div className="relative min-h-[85vh] flex flex-col items-center justify-center
+                  px-6 md:px-20 text-center">
+
+    <h1 className="text-3xl md:text-5xl font-bold text-white max-w-4xl">
+      Creative Design & Marketing Solutions for{" "}
+      <span className="text-amber-400">Growing Businesses</span>
+    </h1>
+
+    <p className="mt-5 text-slate-300 text-sm md:text-base max-w-xl">
+      From visual branding to digital & on-ground marketing — we help brands
+      stand out and grow.
+    </p>
+
+    <div className="flex flex-wrap gap-4 mt-10">
+      <button className="bg-amber-400 text-slate-900 px-6 py-3 rounded-full
+                         text-sm font-semibold hover:bg-amber-500 transition">
+        Get Started
+      </button>
+
+      <button className="border border-slate-400 text-slate-100 px-6 py-3
+                         rounded-full text-sm font-medium
+                         hover:bg-slate-100 hover:text-slate-900 transition">
+        Book a Consultation
+      </button>
+    </div>
+  </div>
+</section> */}
+
+
+
+
+<section className="relative mx-3 md:mx-10 my-3 md:my-6 rounded-3xl overflow-hidden bg-slate-950">
+
+  {/* Blur shapes */}
+  <div className="absolute -top-24 -left-24 w-56 h-56 md:w-96 md:h-96
+                  bg-indigo-500/30 rounded-full blur-3xl" />
+
+  <div className="absolute top-1/3 -right-24 w-56 h-56 md:w-96 md:h-96
+                  bg-amber-400/30 rounded-full blur-3xl" />
+
+  <div
+    className="relative flex flex-col items-center justify-center text-center
+               px-4 md:px-20
+               min-h-[70vh] md:min-h-[85vh]"
+  >
+    <h1 className="text-2xl md:text-5xl font-bold text-white leading-snug md:leading-tight max-w-4xl">
+      Creative Design & Marketing Solutions for{" "}
+      <span className="text-amber-400">Growing Businesses</span>
+    </h1>
+
+    <p className="mt-4 text-slate-300 text-xs md:text-base max-w-xl">
+      From visual branding to digital & on-ground marketing — we help brands
+      stand out and grow.
+    </p>
+
+    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 md:mt-10">
+      <button
+        className="bg-amber-400 text-slate-900 px-6 py-3 rounded-full
+                   text-sm font-semibold hover:bg-amber-500 transition"
+      >
+        Get Started
+      </button>
+
+      <button
+        className="border border-slate-400 text-slate-100 px-6 py-3 rounded-full
+                   text-sm font-medium hover:bg-slate-100 hover:text-slate-900 transition"
+      >
+        Book a Consultation
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+
+
       <Services/>
+      <About/>
+      <Contact/>
     </>
   );
 };
