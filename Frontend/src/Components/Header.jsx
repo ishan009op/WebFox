@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import ContactModal from "./ContactModal.jsx";
+
+
+
 
 const menuItems = [
   { name: "Home", path: "/" },
@@ -12,6 +16,7 @@ const menuItems = [
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const[source,setSource]=useState('')
   const navigate = useNavigate();
 
   return (
@@ -45,7 +50,14 @@ const Header = () => {
             </li>
           ))}
 
-          <button className="bg-amber-400 w-16 text-[9px] font-medium md:w-32 md:text-base md:px-2  py-2 rounded-xl text-white">
+          <button
+          
+          onClick={() => {
+                setSource("get-started");
+                setOpen(true);
+              }}
+          
+          className="bg-amber-400 w-16 text-[9px] font-medium md:w-32 md:text-base md:px-2  py-2 rounded-xl text-white">
             Get Started
           </button>
         </div>
@@ -53,7 +65,11 @@ const Header = () => {
         
       </div>
 
-     
+     <ContactModal
+        open={open}
+        onClose={() => setOpen(false)}
+        source={source}
+      />
      
     </>
   );

@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 const Contact = () => {
+
+  const[Name,SetName]=useState('')
+  const[Email,SetEmail]=useState('')
+  const[Desc,SetDesc]=useState('')
+
+const addContact=async(e)=>{
+
+e.preventDefault();
+
+  if (!Name || !Email || !Desc) {
+    alert("Please fill all required fields");
+    return;
+  }
+
+  const res=await axios.post("https://webfox-ue5o.onrender.com/api/user",{
+name:Name,
+email:Email,
+desc:Desc
+  })
+
+SetName('')
+SetEmail('')
+SetDesc('')
+  console.log(res.data)
+}
   return (
     <section
       id="contact"
@@ -39,6 +65,7 @@ const Contact = () => {
 
         {/* Right form */}
         <motion.form
+        action={addContact}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -47,6 +74,8 @@ const Contact = () => {
         >
           <input
             type="text"
+            value={Name}
+            onChange={(e)=>SetName(e.target.value)}
             placeholder="Your Name"
             className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
                        px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
@@ -54,6 +83,8 @@ const Contact = () => {
 
           <input
             type="email"
+             value={Email}
+            onChange={(e)=>SetEmail(e.target.value)}
             placeholder="Email Address"
             className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
                        px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
@@ -61,12 +92,15 @@ const Contact = () => {
 
           <textarea
             rows="4"
+             value={Desc}
+            onChange={(e)=>SetDesc(e.target.value)}
             placeholder="Tell us about your project..."
             className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
                        px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
           />
 
           <motion.button
+          type="submit"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             className="w-full bg-amber-400 text-slate-900 font-semibold

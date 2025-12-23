@@ -1,7 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
 
 const ContactModal = ({ open, onClose, source }) => {
+  const [Name, SetName] = useState("");
+  const [Email, SetEmail] = useState("");
+  const [Phone, SetPhone] = useState("");
+  const [Budget, SetBudget] = useState("");
+  const [LookingFor, SetLookingFor] = useState("");
+  const [Desc, SetDesc] = useState("");
+
+  const AddContact = async (e) => {
+
+    e.preventDefault();
+
+  if (!Name || !Email || !Phone || !Desc) {
+    alert("Please fill all required fields");
+    return;
+  }
+  
+    try {
+      const res = await axios.post("https://webfox-ue5o.onrender.com/api/contact", {
+        name: Name,
+        email: Email,
+        phone: Phone,
+        budget: Budget,
+        lookingFor: LookingFor,
+        desc: Desc
+      });
+      console.log("Success:", res.data);
+      // reset
+      SetName(""); SetEmail(""); SetPhone(""); SetBudget(""); SetLookingFor(""); SetDesc("");
+      onClose();
+    } catch (err) {
+      console.error("Error submitting form:", err);
+    }
+  };
+
   if (!open) return null;
 
   return (
@@ -29,32 +64,42 @@ const ContactModal = ({ open, onClose, source }) => {
             Tell us about your project. We’ll get back to you within 24 hours.
           </p>
 
-          <form className="space-y-3">
+          <form className="space-y-3" onSubmit={AddContact}>
             <input
               type="text"
               placeholder="Your Name"
+              value={Name}
+              onChange={(e) => SetName(e.target.value)}
               className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
             />
 
             <input
               type="email"
               placeholder="Email Address"
+              value={Email}
+              onChange={(e) => SetEmail(e.target.value)}
               className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
             />
 
             <input
               type="tel"
               placeholder="Phone Number"
+              value={Phone}
+              onChange={(e) => SetPhone(e.target.value)}
               className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
             />
 
             <input
-              type="text"
+              type="Number"
               placeholder="Budget"
+              value={Budget}
+              onChange={(e) => SetBudget(e.target.value)}
               className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
             />
 
             <select
+              value={LookingFor}
+              onChange={(e) => SetLookingFor(e.target.value)}
               className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
             >
               <option value="">Looking For</option>
@@ -67,10 +112,13 @@ const ContactModal = ({ open, onClose, source }) => {
             <textarea
               rows="4"
               placeholder="Project Description"
+              value={Desc}
+              onChange={(e) => SetDesc(e.target.value)}
               className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
             />
 
             <motion.button
+              type="submit"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="w-full bg-amber-400 text-slate-900 font-semibold py-3 rounded-full"

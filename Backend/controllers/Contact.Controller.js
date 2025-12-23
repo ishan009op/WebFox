@@ -1,10 +1,10 @@
 import Contact from '../models/Contact.model.js'
 
 export const addContact=async(req,res)=>{
-    const {name,email,phone,url,budget,lookingFor,description}=req.body
+    const {name,email,phone,budget,lookingFor,desc}=req.body
     
     const newContact= await Contact.create({
-        name,email,phone,url,budget,lookingFor,description
+        name,email,phone,budget,lookingFor,desc
     })
     res.json(newContact)
 }

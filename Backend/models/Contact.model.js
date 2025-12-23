@@ -20,10 +20,10 @@ budget:{
 
 lookingFor:{
     type:String,
-    enum:['website','design','video edit','thumbnail','socialmedia post','logo','animations'],
+    enum:["graphic-design","branding","digital-marketing","consultation"],
     required:true
 },
-description:{
+desc:{
     type:String,
     required:true
 },
