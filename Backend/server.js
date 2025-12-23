@@ -7,23 +7,27 @@ import cors from 'cors';
 
 dotenv.config();
 const app = express();
+
+// ✅ Allowed frontend origin
 const allowedOrigin = "https://web-fox-seven.vercel.app";
 
-// CORS Middleware — put this **before any routes**
+// 🟢 CORS configuration
 app.use(
   cors({
-    origin: allowedOrigin, // exact origin, no "*"
+    origin: allowedOrigin,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
+    credentials: true, // allow cookies/auth
   })
 );
 
+// Handle preflight requests for all routes
+app.options("*", cors({ origin: allowedOrigin, credentials: true }));
 
-
-app.use(express.json());
-
-// Connect to DB
+// Connect to MongoDB
 connect();
+
+// Body parser
+app.use(express.json());
 
 // Routes
 app.use('/api/contact', ContactRoutes);
@@ -31,4 +35,6 @@ app.use('/api/user', UserRoutes);
 
 // Start server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
