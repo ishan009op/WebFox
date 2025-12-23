@@ -10,7 +10,7 @@ import ContactModal from './ContactModal.jsx';
 
 const Home = () => {
 
-  onst [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [source, setSource] = useState("");
   UseScrollToHash()
   return (
