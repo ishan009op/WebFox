@@ -1,12 +1,13 @@
 import express from 'express'
 import { addUser, singleUser, viewUsers } from '../controllers/User.controller.js'
-import { singleContact } from '../controllers/Contact.Controller.js'
+
+import  adminAuth  from '../middlewares/Admin.Auth.js'
 
 const router = express.Router()
 
 
-router.get('/',viewUsers)
+router.get('/',adminAuth,viewUsers)
 router.post('/',addUser)
-router.get('/:id',singleUser)
+router.get('/:id',adminAuth,singleUser)
 
 export default router
