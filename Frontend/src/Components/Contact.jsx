@@ -20,12 +20,12 @@ e.preventDefault();
   const res=await axios.post("https://webfox-ue5o.onrender.com/api/user",{
 name:Name,
 email:Email,
-desc:Desc
+
   },)
 
 SetName('')
 SetEmail('')
-SetDesc('')
+
   console.log(res.data)
 }
   return (
@@ -90,14 +90,7 @@ SetDesc('')
                        px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
           />
 
-          <textarea
-            rows="4"
-             value={Desc}
-            onChange={(e)=>SetDesc(e.target.value)}
-            placeholder="Tell us about your project..."
-            className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
-                       px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
-          />
+          
 
           <motion.button
           type="submit"

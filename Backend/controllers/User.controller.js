@@ -1,13 +1,13 @@
 import User from '../models/User.model.js'
 
 export const addUser=async(req,res)=>{
-    const {name,email,desc}=req.body
+    const {name,email}=req.body
     const user=await User.findOne({email})
     if(user){
         return res.json("user elready existed")
     }
     const newUser= await User.create({
-        name,email,desc
+        name,email
     })
     res.json(newUser)
 }
