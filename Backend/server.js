@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import connect from './config/db.js';
 import ContactRoutes from './routes/Contact.Route.js';
 import UserRoutes from './routes/User.Route.js';
-import AdminRoutes from './routes/Admin.Route.js'
+
 import cors from 'cors';
 
 dotenv.config();
@@ -35,7 +35,7 @@ connect();
 // Routes
 app.use('/api/contact', ContactRoutes);
 app.use('/api/user', UserRoutes);
-app.use('/api/admin', AdminRoutes);
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {

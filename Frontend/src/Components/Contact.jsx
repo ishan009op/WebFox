@@ -113,7 +113,7 @@ const Contact = () => {
                        py-3 rounded-full hover:bg-amber-500 transition
                        disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? "Sending..." : "Send Message"}
+            {loading ? "Subscribing..." : "Subscribe"}
           </motion.button>
         </motion.form>
       </div>
