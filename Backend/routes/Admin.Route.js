@@ -12,6 +12,16 @@ router.post("/check", async (req, res) => {
   res.json({ isAdmin: !!admin });
 });
 
+router.post('/',async(req,res)=>{
+const {email}=req.body
+const admin= await Admin.findOne({email})
+if(admin)return res.json("user is already admin")
+
+    const newAdmin=await Admin.create({email})
+
+    res.json(newAdmin)
+})
+
 // Example protected route
 router.get("/dashboard", adminAuth, (req, res) => {
   res.json({ message: "Welcome to admin dashboard!" });
