@@ -7,18 +7,20 @@ import cors from 'cors'
 const app=express()
 dotenv.config()
 
-connect()
 
 app.use(
-  cors({
+    cors({
     origin: "https://web-fox-seven.vercel.app", // frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE","OPTIONS"],
     credentials: true,
-  })
+})
 );
 
+connect()
 
 app.use(express.json())
+
+
 app.use('/api/contact',ContactRoutes)
 app.use('/api/user',UserRoutes)
 
