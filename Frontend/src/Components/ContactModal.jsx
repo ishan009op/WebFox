@@ -19,36 +19,55 @@ const ContactModal = ({ open, onClose, source }) => {
           animate={{ scale: 1, y: 0, opacity: 1 }}
           exit={{ scale: 0.9, y: 40, opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="w-full max-w-md bg-slate-900 rounded-2xl p-6"
+          className="w-full max-w-lg bg-slate-900 rounded-2xl p-6 md:p-8 space-y-4"
         >
-          <h3 className="text-xl font-bold text-white mb-2">
-            {source === "consult"
-              ? "Book a Consultation"
-              : "Get Started"}
+          <h3 className="text-2xl font-bold text-white mb-2">
+            {source === "consult" ? "Book a Consultation" : "Get Started"}
           </h3>
 
           <p className="text-slate-400 text-sm mb-4">
-            Tell us about your project. We’ll get back within 24 hours.
+            Tell us about your project. We’ll get back to you within 24 hours.
           </p>
-
-          {/* Hidden context */}
-          <input type="hidden" value={source} />
 
           <form className="space-y-3">
             <input
+              type="text"
               placeholder="Your Name"
-              className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none"
+              className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
             />
 
             <input
+              type="email"
               placeholder="Email Address"
-              className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none"
+              className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
             />
+
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
+            />
+
+            <input
+              type="text"
+              placeholder="Budget"
+              className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
+            />
+
+            <select
+              className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
+            >
+              <option value="">Looking For</option>
+              <option value="graphic-design">Graphic Design</option>
+              <option value="branding">Branding</option>
+              <option value="digital-marketing">Digital Marketing</option>
+              <option value="consultation">Consultation</option>
+            </select>
 
             <textarea
               rows="4"
-              placeholder="Project details"
-              className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none"
+              placeholder="Project Description"
+              className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-amber-400"
             />
 
             <motion.button

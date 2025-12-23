@@ -17,10 +17,7 @@ budget:{
     type:Number,
     required:true
 },
-url:{
-    type:String,
-    required:true
-},
+
 lookingFor:{
     type:String,
     enum:['website','design','video edit','thumbnail','socialmedia post','logo','animations'],
