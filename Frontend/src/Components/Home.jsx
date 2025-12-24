@@ -20,7 +20,7 @@ const Home = () => {
         {/* Blur shapes */}
         <div className="absolute -top-24 -left-24 w-56 h-56 md:w-96 md:h-96
                         bg-indigo-500/30 rounded-full blur-3xl" />
-        <div className="absolute top-1/3 -right-24 w-56 h-56 md:w-96 md:h-96
+        <div className="absolute top-2/4 -right-24 w-56 h-56 md:w-96 md:h-96
                         bg-amber-400/30 rounded-full blur-3xl" />
 
         <div className="relative flex flex-col items-center justify-center text-center
