@@ -50,8 +50,7 @@ export const singleUser=async(req,res)=>{
     res.json(user)
 }
 
-import jwt from "jsonwebtoken";
-import User from "../models/User.model.js";
+
 
 export const verifyEmail = async (req, res) => {
   try {
