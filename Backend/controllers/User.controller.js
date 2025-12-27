@@ -1,51 +1,62 @@
-import User from "../models/User.model.js";
-import crypto from "crypto";
+
 import { sendVerificationEmail } from "../utils/ServiceVerification.js";
+
+
+import jwt from "jsonwebtoken";
+import crypto from "crypto";
+import User from "../models/User.model.js";
 
 
 export const addUser = async (req, res) => {
   try {
     const { name, email } = req.body;
 
-    // Check if user already exists
+    // 1. Check existing user
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // Generate verification token
+    // 2. Email verification token
     const verificationToken = crypto.randomBytes(32).toString("hex");
 
-    // Create new user
+    // 3. Create user
     const newUser = await User.create({
       name,
       email,
       verificationToken,
       isVerified: false,
+      role: "user",
     });
 
-    // Send verification email
-    try {
-      await sendVerificationEmail(email, verificationToken);
-      console.log("Verification email sent to:", email);
-    } catch (err) {
-      console.error("Failed to send verification email:", err.message);
-      // optional: you can delete the user here if email fails
-      // await User.deleteOne({ _id: newUser._id });
-      return res.status(500).json({
-        message: "User created but failed to send verification email",
-        error: err.message,
-      });
-    }
+    // 4. Send verification email
+    await sendVerificationEmail(email, verificationToken);
 
-    // Respond success
+    // 5. Generate JWT (AUTH token)
+    const jwtToken = jwt.sign(
+      {
+        userId: newUser._id,
+        role: newUser.role,
+        isVerified: newUser.isVerified,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    // 6. Response
     res.status(201).json({
-      message: "User created. Please check your email to verify your account.",
-      user: { name: newUser.name, email: newUser.email },
+      message: "User created. Verify your email.",
+      token: jwtToken,
+      user: {
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email,
+        isVerified: newUser.isVerified,
+      },
     });
   } catch (err) {
     console.error("Error in addUser:", err.message);
-    res.status(500).json({ message: "Server error", error: err.message });
+    res.status(500).json({ message: "Server error" });
   }
 };
 

@@ -3,9 +3,8 @@ import { motion } from "framer-motion";
 import axios from "axios";
 
 const Contact = () => {
-  const [Name, SetName] = useState('');
-  const [Email, SetEmail] = useState('');
-  const [Desc, SetDesc] = useState('');
+  const [Name, SetName] = useState("");
+  const [Email, SetEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
   const addContact = async (e) => {
@@ -18,21 +17,33 @@ const Contact = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("https://webfox-ue5o.onrender.com/api/user", {
-        name: Name,
-        email: Email,
-        
-      });
 
-      // Success!
-      alert("Message sent successfully!");
-      SetName('');
-      SetEmail('');
-      
-      console.log(res.data);
+      const res = await axios.post(
+        "https://webfox-ue5o.onrender.com/api/user",
+        {
+          name: Name,
+          email: Email,
+        }
+      );
+
+      // ⭐ STORE TOKEN & USER
+      if (res.data.token) {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+      }
+
+      alert("User created! Please verify your email.");
+
+      SetName("");
+      SetEmail("");
+
+      console.log("Saved user:", res.data.user);
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("Failed to send message. Please try again.");
+      alert(
+        error.response?.data?.message ||
+          "Failed to submit. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -48,8 +59,7 @@ const Contact = () => {
       <div className="absolute -bottom-24 -left-24 w-64 h-64 md:w-96 md:h-96 bg-amber-400/30 blur-3xl rounded-full" />
 
       <div className="relative px-6 md:px-20 py-14 md:py-20 grid md:grid-cols-2 gap-10 items-center">
-        
-        {/* Left content */}
+        {/* Left */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -60,22 +70,14 @@ const Contact = () => {
             Let's Build Something{" "}
             <span className="text-amber-400">Meaningful</span>
           </h2>
-
           <p className="mt-4 text-slate-300 text-sm md:text-base max-w-md">
-            Tell us about your business, idea, or project. We'll help you turn
-            it into a strong brand and a high-impact presence.
+            Tell us about your business, idea, or project.
           </p>
-
-          <div className="mt-6 space-y-3 text-slate-300 text-sm">
-            <p>📍 Location: Your City, India</p>
-            <p>📧 Email: hello@yourbrand.com</p>
-            <p>📞 Phone: +91 XXXXX XXXXX</p>
-          </div>
         </motion.div>
 
         {/* Right form */}
         <motion.form
-          onSubmit={addContact} // ✅ Changed from action to onSubmit
+          onSubmit={addContact}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -88,8 +90,7 @@ const Contact = () => {
             onChange={(e) => SetName(e.target.value)}
             placeholder="Your Name"
             required
-            className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
-                       px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
+            className="w-full bg-slate-800 text-slate-100 px-4 py-3 rounded-xl"
           />
 
           <input
@@ -98,22 +99,17 @@ const Contact = () => {
             onChange={(e) => SetEmail(e.target.value)}
             placeholder="Email Address"
             required
-            className="w-full bg-slate-800 text-slate-100 placeholder-slate-400
-                       px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-amber-400"
+            className="w-full bg-slate-800 text-slate-100 px-4 py-3 rounded-xl"
           />
-
-          
 
           <motion.button
             type="submit"
             disabled={loading}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="w-full bg-amber-400 text-slate-900 font-semibold
-                       py-3 rounded-full hover:bg-amber-500 transition
-                       disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-amber-400 text-slate-900 font-semibold py-3 rounded-full disabled:opacity-50"
           >
-            {loading ? "Subscribing..." : "Subscribe"}
+            {loading ? "Submitting..." : "Subscribe"}
           </motion.button>
         </motion.form>
       </div>
