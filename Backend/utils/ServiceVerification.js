@@ -1,32 +1,26 @@
-import nodemailer from "nodemailer";
-import dotenv from 'dotenv'
-dotenv.config()
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export const sendVerificationEmail = async (toEmail, token) => {
   try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.GMAIL_USER, // your Gmail
-        pass: process.env.GMAIL_PASS, // Gmail App Password
-      },
-    });
+    const verificationUrl =
+      `https://webfox-ue5o.onrender.com/api/user/verify-email/${token}`;
 
-    const verificationUrl = `https://webfox-ue5o.onrender.com/api/user/verify-email/${token}`;
-
-    const mailOptions = {
-      from: process.env.GMAIL_USER,
+    await resend.emails.send({
+      from: "WebFox <onboarding@resend.dev>",
       to: toEmail,
-      subject: "Verify Your Email",
+      subject: "Verify your email",
       html: `
+        <h3>Email Verification</h3>
         <p>Click the link below to verify your email:</p>
         <a href="${verificationUrl}">Verify Email</a>
       `,
-    };
+    });
 
-    const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent:", info.response);
-  } catch (err) {
-    console.error("Error sending verification email:", err.message);
-    throw err; // re-throw to handle in addUser
+    console.log("✅ Verification email sent to:", toEmail);
+  } catch (error) {
+    console.error("❌ Error sending verification email:", error);
+    throw error; // important so controller knows it failed
   }
 };
