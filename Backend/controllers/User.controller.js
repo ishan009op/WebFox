@@ -1,29 +1,38 @@
-import User from '../models/User.model.js'
-import crypto from 'crypto'
-import { sendVerificationEmail } from '../utils/ServiceVerification.js';
+import User from "../models/User.model.js";
+import crypto from "crypto";
+import { sendVerificationEmail } from "../utils/ServiceVerification.js";
+
 export const addUser = async (req, res) => {
-  const { name, email } = req.body;
+  try {
+    const { name, email } = req.body;
 
-  const user = await User.findOne({ email });
-  if (user) return res.status(400).json({ message: "User already exists" });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
 
-  // generate random verification token
-  const verificationToken = crypto.randomBytes(32).toString("hex");
+    // generate verification token
+    const verificationToken = crypto.randomBytes(32).toString("hex");
 
-  const newUser = await User.create({
-    name,
-    email,
-    verificationToken,
-  });
+    const newUser = await User.create({
+      name,
+      email,
+      verificationToken,
+      isVerified: false,
+    });
 
-  // send verification email
-  await sendVerificationEmail(email, verificationToken);
+    // send verification email
+    await sendVerificationEmail(email, verificationToken);
 
-  res.status(201).json({
-    message: "User created. Please check your email to verify your account.",
-    user: { name: newUser.name, email: newUser.email },
-  });
+    res.status(201).json({
+      message: "User created. Please check your email to verify your account.",
+      user: { name: newUser.name, email: newUser.email },
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
 };
+
 
 export const viewUsers=async(req,res)=>{
     const users=await User.find({})
@@ -38,13 +47,17 @@ export const singleUser=async(req,res)=>{
 }
 
 export const EmailVerify=async(req,res)=>{
+     try {
     const { token } = req.params;
-  const user = await User.findOne({ verificationToken: token });
-  if (!user) return res.status(400).send("Invalid token");
+    const user = await User.findOne({ verificationToken: token });
+    if (!user) return res.status(400).send("Invalid or expired token");
 
-  user.isVerified = true;
-  user.verificationToken = undefined; // remove token
-  await user.save();
+    user.isVerified = true;
+    user.verificationToken = undefined; // remove token after verification
+    await user.save();
 
-  res.send("Email verified successfully! You can now login.");
+    res.send("Email verified successfully! You can now login.");
+  } catch (err) {
+    res.status(500).send("Server error");
+  }
 }
