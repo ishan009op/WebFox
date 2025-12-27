@@ -9,6 +9,11 @@ export const isAdmin = async (req, res, next) => {
     return res.status(403).json({ message: "Admin only" });
   }
 
+  if (!user.isVerified) {
+  return res.status(403).json({ message: "Please verify your email first" });
+}
+
+
   req.user = user;
   next();
 };

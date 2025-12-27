@@ -7,6 +7,7 @@ import About from './About.jsx';
 import Contact from './Contact.jsx';
 import ContactModal from './ContactModal.jsx';
 import TestUsersAxios from './TestUSerAxios.jsx';
+import AdminPanel from './AdminPAnel.jsx';
 
 const Home = () => {
   const [open, setOpen] = useState(false);
@@ -76,6 +77,7 @@ const Home = () => {
       />
 
       <TestUsersAxios/>
+      <AdminPanel/>
     </>
   );
 };
