@@ -6,6 +6,7 @@ import UseScrollToHash from './UseScrollToHash.js';
 import About from './About.jsx';
 import Contact from './Contact.jsx';
 import ContactModal from './ContactModal.jsx';
+import TestUsersAxios from './TestUSerAxios.jsx';
 
 const Home = () => {
   const [open, setOpen] = useState(false);
@@ -73,6 +74,8 @@ const Home = () => {
         onClose={() => setOpen(false)}
         source={source}
       />
+
+      <TestUsersAxios/>
     </>
   );
 };

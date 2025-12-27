@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "../models/User.model.js"
 
 export const isAdmin = async (req, res, next) => {
   const email = req.headers["x-user-email"]; // for dev/testing only
