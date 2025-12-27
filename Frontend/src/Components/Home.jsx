@@ -76,8 +76,8 @@ const Home = () => {
         source={source}
       />
 
-      <TestUsersAxios/>
-      <AdminPanel/>
+      {/* <TestUsersAxios/>
+      <AdminPanel/> */}
     </>
   );
 };
