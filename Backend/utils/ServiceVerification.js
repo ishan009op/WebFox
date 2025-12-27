@@ -8,7 +8,7 @@ export const sendVerificationEmail = async (toEmail, token) => {
       `https://webfox-ue5o.onrender.com/api/user/verify-email/${token}`;
 
     await resend.emails.send({
-      from: "WebFox <onboarding@resend.dev>",
+      from: "ishanprashar97085@gmail.com",
       to: toEmail,
       subject: "Verify your email",
       html: `
