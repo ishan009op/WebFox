@@ -8,7 +8,7 @@ export const sendVerificationEmail = async (toEmail, token) => {
       `https://webfox-ue5o.onrender.com/api/user/verify-email/${token}`;
 
     await resend.emails.send({
-      from: "ishanprashar97085@gmail.com",
+      from: "WebFox <no-reply@resend.dev>", // ✅ allowed sender
       to: toEmail,
       subject: "Verify your email",
       html: `
@@ -21,6 +21,6 @@ export const sendVerificationEmail = async (toEmail, token) => {
     console.log("✅ Verification email sent to:", toEmail);
   } catch (error) {
     console.error("❌ Error sending verification email:", error);
-    throw error; // important so controller knows it failed
+    throw error;
   }
 };
