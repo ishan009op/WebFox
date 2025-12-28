@@ -8,12 +8,14 @@ import Contact from './Contact.jsx';
 import ContactModal from './ContactModal.jsx';
 import TestUsersAxios from './TestUSerAxios.jsx';
 import AdminPanel from './AdminPanel.jsx';
-
+import { getUserFromToken } from '../utilis/GetUser.js';
 const Home = () => {
   const [open, setOpen] = useState(false);
   const [source, setSource] = useState("");
-
-  UseScrollToHash();
+const user=getUserFromToken()
+  UseScrollToHash()
+  
+  console.log(user)
 
   return (
     <>
@@ -76,8 +78,12 @@ const Home = () => {
         source={source}
       />
 
-      {/* <TestUsersAxios/>
-      <AdminPanel/> */}
+      {user?.role === "admin" && (
+        <>
+  <AdminPanel />
+  <TestUsersAxios/>
+  </>
+)}
     </>
   );
 };
