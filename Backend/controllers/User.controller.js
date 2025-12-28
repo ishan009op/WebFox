@@ -78,7 +78,7 @@ export const verifyEmail = async (req, res) => {
 
     // 🔁 Redirect to frontend with token
     res.redirect(
-      `https://your-frontend-url.com/verify-success?token=${jwtToken}`
+      `https://web-fox-seven.vercel.app/verify-success?token=${jwtToken}`
     );
   } catch (err) {
     res.status(500).json({ message: "Verification failed" });
