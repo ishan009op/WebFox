@@ -16,7 +16,7 @@ const VerifySuccess = () => {
     }
 
     // ✅ Save JWT
-    localStorage.setItem("token", token);
+    localStorage.setItem("WEBtoken", token);
 
     // ✅ Clean URL (remove token from address bar)
     window.history.replaceState({}, document.title, "/verify-success");

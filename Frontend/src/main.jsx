@@ -18,7 +18,14 @@ const router=createBrowserRouter([{
     {
       path:"/verify-success",
       element:<VerifySuccess/>
-    }
+    },{
+  path:"/admin",
+  element:(
+    <AdminRoute>
+      <AdminPanel/>
+    </AdminRoute>
+  )
+}
     
   ]
 
