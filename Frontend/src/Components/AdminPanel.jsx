@@ -1,43 +1,48 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { getUserFromToken } from "../utilis/GetUser";
 
-const AdminPanel = ({ loggedInEmail }) => {
+const AdminPanel = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // Step 1: Check if user is admin
-  const checkAdmin = async () => {
-    try {
-      // Fetch all users (protected route)
-      const res = await axios.get(
-        "https://webfox-ue5o.onrender.com/api/user",
-        {
-          headers: { "x-user-email": loggedInEmail },
-        }
-      );
-
-      // If the request succeeds, it means the email is admin
-      setIsAdmin(true);
-      setUsers(res.data);
-    } catch (err) {
-      setIsAdmin(false);
-      setError(err.response?.data?.message || err.message);
-    }
-  };
+  const userPayload = getUserFromToken();
+  const token = localStorage.getItem("WEBtoken");
 
   useEffect(() => {
-    if (loggedInEmail) checkAdmin();
-  }, [loggedInEmail]);
+    const fetchUsers = async () => {
+      if (!userPayload || !userPayload.isAdmin) {
+        setError("Not an admin");
+        setLoading(false);
+        return;
+      }
 
-  if (!isAdmin) {
-    return <p className="text-red-500">{error || "Not an admin"}</p>;
-  }
+      try {
+        const res = await axios.get(
+          "https://webfox-ue5o.onrender.com/api/user",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setUsers(res.data.users || res.data); // depending on backend response
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
 
   return (
     <div className="p-6 max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Admin Panel</h1>
-      {users.length > 0 && (
+      {users.length > 0 ? (
         <ul className="list-disc pl-6">
           {users.map((user) => (
             <li key={user._id}>
@@ -45,6 +50,8 @@ const AdminPanel = ({ loggedInEmail }) => {
             </li>
           ))}
         </ul>
+      ) : (
+        <p>No users found</p>
       )}
     </div>
   );

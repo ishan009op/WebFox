@@ -78,11 +78,7 @@ const user=getUserFromToken()
         source={source}
       />
 
-      {user?.role === "admin" && (
-        <>
-  
-  </>
-)}
+     <AdminPanel/>
     </>
   );
 };
