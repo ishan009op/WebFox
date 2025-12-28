@@ -15,7 +15,7 @@ const Home = () => {
 const user=getUserFromToken()
   UseScrollToHash()
   
-  console.log(user)
+  
 
   return (
     <>
@@ -80,8 +80,7 @@ const user=getUserFromToken()
 
       {user?.role === "admin" && (
         <>
-  <AdminPanel />
-  <TestUsersAxios/>
+  
   </>
 )}
     </>
