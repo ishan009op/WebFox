@@ -14,7 +14,7 @@ const AdminPanel = () => {
 
 
 const refreshToken=async()=>{
-  const res = await axios.get("/api/refresh-token", {
+  const res = await axios.get("https://webfox-ue5o.onrender.com/api/user/refresh-token", {
   headers: { Authorization: `Bearer ${localStorage.getItem("WEBtoken")}` },
 });
 localStorage.setItem("WEBtoken", res.data.token);
