@@ -13,8 +13,8 @@ const Home = () => {
   const [open, setOpen] = useState(false);
   const [source, setSource] = useState("");
 const user=getUserFromToken()
+console.log(user)
   UseScrollToHash()
-  
   
 
   return (
