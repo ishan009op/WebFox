@@ -78,7 +78,7 @@ const user=getUserFromToken()
         source={source}
       />
 
-     <AdminPanel/>
+     {/* <AdminPanel/> */}
     </>
   );
 };
