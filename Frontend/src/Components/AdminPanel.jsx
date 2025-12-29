@@ -11,6 +11,18 @@ const AdminPanel = () => {
   const token = getUserFromToken(); // now ONLY token
 
   useEffect(() => {
+
+
+const refreshToken=async()=>{
+  const res = await axios.get("/api/refresh-token", {
+  headers: { Authorization: `Bearer ${localStorage.getItem("WEBtoken")}` },
+});
+localStorage.setItem("WEBtoken", res.data.token);
+
+}
+refreshToken()
+
+    
     const fetchUsers = async () => {
       if (!token) {
         setError("Not authenticated");

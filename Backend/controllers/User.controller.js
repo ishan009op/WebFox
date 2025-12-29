@@ -84,3 +84,27 @@ export const verifyEmail = async (req, res) => {
     res.status(500).json({ message: "Verification failed" });
   }
 };
+
+export const refresh=async(req,res)=>{
+
+  try {
+    const user = await User.findById(req.user.userId);
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const newToken = jwt.sign(
+      {
+        userId: user._id,
+        role: user.role,
+        isVerified: user.isVerified
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.json({ token: newToken });
+  } catch (err) {
+    res.status(500).json({ message: "Token refresh failed" });
+  }
+
+}
