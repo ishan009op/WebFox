@@ -12,7 +12,7 @@ router.get('/',isAdmin,viewUsers)
 router.post('/',addUser)
 router.get('/:id',isAdmin,singleUser)
 router.get('/verify-email/:token',verifyEmail)
-router.get('/refresh-token',protect,refresh)
+router.get('/refresh-token',refresh)
 
 
 export default router
