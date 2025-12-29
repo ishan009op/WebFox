@@ -18,7 +18,7 @@ const refreshToken=async()=>{
   headers: { Authorization: `Bearer ${localStorage.getItem("WEBtoken")}` },
 });
 localStorage.setItem("WEBtoken", res.data.token);
-
+console.log(res)
 }
 refreshToken()
 
