@@ -4,8 +4,6 @@ import './index.css'
 import App from './App.jsx'
 import {createBrowserRouter,RouterProvider} from 'react-router-dom'
 import Home from './Components/Home.jsx'
-import AdminRoute from './Components/Routes/ProtectedRoute.jsx'
-import VerifySuccess from './Components/VerifySuccess.jsx'
 import AdminPanel from './Components/AdminPanel.jsx'
 
 const router=createBrowserRouter([{
@@ -17,9 +15,6 @@ const router=createBrowserRouter([{
       element:<Home/>
     },
     {
-      path:"/verify-success",
-      element:<VerifySuccess/>
-    },{
   path:"/admin",
   element:(
     // <AdminRoute>

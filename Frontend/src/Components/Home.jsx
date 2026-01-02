@@ -6,14 +6,12 @@ import UseScrollToHash from './UseScrollToHash.js';
 import About from './About.jsx';
 import Contact from './Contact.jsx';
 import ContactModal from './ContactModal.jsx';
-import TestUsersAxios from './TestUSerAxios.jsx';
-import AdminPanel from './AdminPanel.jsx';
-import { getUserFromToken } from '../utilis/GetUser.js';
+
+
 const Home = () => {
   const [open, setOpen] = useState(false);
   const [source, setSource] = useState("");
-const user=getUserFromToken()
-console.log(user)
+
   UseScrollToHash()
   
 

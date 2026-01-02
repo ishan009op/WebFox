@@ -14,7 +14,7 @@ export const protect = async (req, res, next) => {
 
     const user = await User.findById(decoded.userId);
 
-    if (!user || !user.isVerified) {
+    if (!user) {
       return res.status(401).json({ message: "User not verified" });
     }
 
