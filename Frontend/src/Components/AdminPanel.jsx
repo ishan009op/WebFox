@@ -1,53 +1,25 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {jwtDecode} from "jwt-decode";
-import { getUserFromToken } from "../utilis/GetUser";
 
 const AdminPanel = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const token = getUserFromToken(); // now ONLY token
+   // now ONLY token
 
   useEffect(() => {
 
 
-const refreshToken=async()=>{
-  const res = await axios.get("https://webfox-ue5o.onrender.com/api/user/refresh-token", {
-  headers: { Authorization: `Bearer ${localStorage.getItem("WEBtoken")}` },
-});
-localStorage.setItem("WEBtoken", res.data.token);
-console.log(res)
-}
-refreshToken()
+
 
     
     const fetchUsers = async () => {
-      if (!token) {
-        setError("Not authenticated");
-        setLoading(false);
-        return;
-      }
+      
 
-      let decoded;
-      try {
-        decoded = jwtDecode(token);
-      } catch (err) {
-        setError("Invalid token");
-        setLoading(false);
-        return;
-      }
 
       // frontend-only admin check (UX)
-      const isAdmin =
-        decoded.role === "admin" || decoded.isAdmin === true;
-
-      if (!isAdmin) {
-        setError("Not an admin");
-        setLoading(false);
-        return;
-      }
+      
 
       try {
         const res = await axios.get(
