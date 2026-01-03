@@ -16,9 +16,7 @@ const Footer = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-xl font-bold text-white">
-            Brand<span className="text-amber-400">Craft</span>
-          </h3>
+          
           <p className="text-sm mt-3 text-slate-400">
             Creative design & marketing solutions that help brands grow,
             connect, and stand out in the market.
