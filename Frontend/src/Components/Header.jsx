@@ -9,7 +9,7 @@ import ContactModal from "./ContactModal.jsx";
 
 const menuItems = [
   { name: "Home", path: "/" },
-  { name: "Work", path: "/#work" },
+  
   { name: "Services", path: "/#services" },
   { name: "About", path: "/#about" },
   { name: "Contact", path: "/#contact" },
