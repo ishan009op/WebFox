@@ -14,7 +14,7 @@ const ContactModal = ({ open, onClose, source }) => {
 
     e.preventDefault();
 
-  if (!Name || !Email || !Phone || !Desc) {
+  if (!Name || !Email || !Phone || !Desc || !LookingFor || !Budget) {
     alert("Please fill all required fields");
     return;
   }

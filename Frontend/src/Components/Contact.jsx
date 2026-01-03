@@ -34,7 +34,7 @@ const Contact = () => {
       SetName("");
       SetEmail("");
 
-      console.log("Saved user:", res.data.user);
+    
     } catch (error) {
       console.error("Error submitting form:", error);
       alert(
