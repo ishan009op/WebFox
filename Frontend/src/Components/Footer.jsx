@@ -64,9 +64,9 @@ const Footer = () => {
         >
           <h4 className="text-white font-semibold mb-3">Contact</h4>
           <ul className="space-y-2 text-sm">
-            <li className="flex items-center gap-2">📍 Your City, India</li>
-            <li className="flex items-center gap-2">📧 hello@yourbrand.com</li>
-            <li className="flex items-center gap-2">📞 +91 XXXXX XXXXX</li>
+            <li className="flex items-center gap-2">📍 punjab, India</li>
+            <li className="flex items-center gap-2">📧 irahimedia@gmail.com</li>
+            <li className="flex items-center gap-2">📞 +91 95923 97086</li>
           </ul>
         </motion.div>
 

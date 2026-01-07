@@ -1,32 +1,44 @@
-import { motion, useAnimationFrame } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
-const InfiniteServices = ({ children }) => {
+const InfiniteServices = ({ children, speed = 1 }) => {
   const containerRef = useRef(null);
-  const x = useRef(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const scrollPosRef = useRef(0); // persist scroll position
 
-  useAnimationFrame((_, delta) => {
-    const speed = 0.05; // adjust speed here
-    x.current -= delta * speed;
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
-    const width = containerRef.current?.scrollWidth / 2;
+    const totalScrollWidth = container.scrollWidth / 2; // because we duplicate content
 
-    if (x.current <= -width) {
-      x.current = 0;
-    }
+    let animationFrame;
 
-    containerRef.current.style.transform = `translateX(${x.current}px)`;
-  });
+    const scroll = () => {
+      if (!isPaused) {
+        scrollPosRef.current += speed;
+        if (scrollPosRef.current >= totalScrollWidth) {
+          scrollPosRef.current = 0; // loop seamlessly
+        }
+        container.scrollLeft = scrollPosRef.current;
+      }
+      animationFrame = requestAnimationFrame(scroll);
+    };
+
+    scroll();
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isPaused, speed]);
 
   return (
-    <div className="overflow-hidden w-full">
-      <div
-        ref={containerRef}
-        className="flex gap-6 w-max"
-      >
-        {children}
-        {children}
-      </div>
+    <div
+      ref={containerRef}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
+      className="flex gap-6 overflow-x-hidden cursor-grab"
+    >
+      {children}
     </div>
   );
 };

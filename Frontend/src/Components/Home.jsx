@@ -18,7 +18,7 @@ const Home = () => {
     <>
       {/* ================= HERO SECTION ================= */}
      <section
-  id="hero"
+  id="home"
   className="relative w-full min-h-screen bg-white flex items-center px-6 md:px-12 lg:px-20 overflow-hidden"
 >
   {/* ===== LOCKED CORNER GLOWS ===== */}

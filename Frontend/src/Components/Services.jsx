@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import InfiniteServices from "./InfinteServices";
+import { useState, useEffect, useRef } from "react";
 
 const services = [
   {
@@ -73,65 +72,95 @@ const services = [
   },
 ];
 
+const CARD_WIDTH = 400; // width of card including margin
+const SPEED = 15; // px per second
+
 const Services = () => {
+  const containerRef = useRef();
+  const [offsetX, setOffsetX] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const totalWidth = services.length * CARD_WIDTH;
+  const [activeDot, setActiveDot] = useState(0);
+
+  // Auto-scroll loop
+  useEffect(() => {
+    let frameId;
+    let lastTime = performance.now();
+
+    const step = (time) => {
+      if (!paused) {
+        const delta = time - lastTime;
+        setOffsetX((prev) => {
+          let next = prev + (SPEED * delta) / 1000;
+          if (next >= totalWidth) next -= totalWidth; // seamless loop
+          setActiveDot(Math.floor(next / CARD_WIDTH) % services.length);
+          return next;
+        });
+      }
+      lastTime = time;
+      frameId = requestAnimationFrame(step);
+    };
+
+    frameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frameId);
+  }, [paused, totalWidth]);
+
+  const infiniteServices = [...services, ...services, ...services];
+
+  const scrollToCard = (index) => {
+    setOffsetX(index * CARD_WIDTH);
+  };
+
   return (
-    <section
-      id="services"
-      className="relative w-full bg-gray-50 py-16 px-4 md:px-10 overflow-hidden"
-    >
-      {/* Heading */}
-      <div className="text-center max-w-2xl mx-auto mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-          Our Creative Services
-        </h2>
-        <p className="text-gray-600 mt-3">
-          We help brands grow with powerful design & marketing solutions.
-        </p>
+    <section className="relative w-full py-16 px-4 md:px-10 bg-gray-50 overflow-hidden">
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8">
+        Our Services
+      </h2>
+
+      <div
+        className="overflow-hidden cursor-grab"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div
+          className="flex gap-6"
+          style={{ transform: `translateX(${-offsetX}px)` }}
+          ref={containerRef}
+          onMouseDown={() => setPaused(true)}
+          onMouseUp={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={() => setPaused(false)}
+        >
+          {infiniteServices.map((service, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg flex-shrink-0 w-96 cursor-pointer relative"
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-amber-400 rounded-t-xl" />
+              <h3 className="text-2xl font-bold text-gray-900 mb-3 mt-2">{service.title}</h3>
+              <p className="text-gray-700 text-sm mb-4">{service.description}</p>
+              <ul className="list-disc list-inside text-gray-800 space-y-1 text-sm">
+                {service.features.map((f, i) => (
+                  <li key={i}>{f}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Horizontal Scrolling Container */}
-      
-        {/* Repeat services twice for infinite effect */}
-    <InfiniteServices> {[...services, ...services].map((service, index) => (
-  <motion.div
-    key={index}
-    className="bg-white rounded-3xl p-6 border border-gray-200 shadow-lg flex-shrink-0 w-72 relative overflow-hidden cursor-pointer"
-    initial={{ opacity: 0, y: 20, scale: 0.95 }}
-    animate={{ opacity: 1, y: 0, scale: 1 }}
-    transition={{ duration: 0.6, delay: index * 0.1 }}
-    whileHover={{
-      y: -10,
-      scale: 1.05,
-      boxShadow: "0 20px 40px rgba(0,0,0,0.12)",
-      transition: { duration: 0.3 },
-    }}
-  >
-    {/* Gradient accent bar */}
-    <div className="absolute top-0 left-0 w-full h-1 bg-amber-400 rounded-t-xl" />
-
-    <h3 className="text-xl font-bold text-gray-900 mb-2 mt-2">
-      {service.title}
-    </h3>
-    <p className="text-gray-700 text-sm mb-4">{service.description}</p>
-
-    <h4 className="text-sm font-semibold text-amber-500 mb-2">Features</h4>
-    <ul className="list-disc list-inside text-gray-800 space-y-1 text-sm">
-      {service.features.map((feature, i) => (
-        <li key={i}>{feature}</li>
-      ))}
-    </ul>
-
-    {/* Optional floating blurred circle for depth */}
-    <motion.div
-      className="absolute -top-6 -right-6 w-16 h-16 bg-amber-100/40 rounded-full blur-2xl"
-      animate={{ y: [0, 6, 0], x: [0, 4, 0] }}
-      transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-      />
-  </motion.div>
-))}
-</InfiniteServices> 
-
-    
+      {/* Dots */}
+      <div className="flex justify-center mt-6 gap-2">
+        {services.map((_, idx) => (
+          <div
+            key={idx}
+            className={`w-3 h-3 rounded-full transition-colors duration-300 cursor-pointer ${
+              activeDot === idx ? "bg-amber-400" : "bg-gray-300"
+            }`}
+            onClick={() => scrollToCard(idx)}
+          />
+        ))}
+      </div>
     </section>
   );
 };
