@@ -16,7 +16,7 @@ const app = express();
 //   allowedHeaders: ["Content-Type", "Authorization"]
 // }));
 app.use(cors({
-  origin: 'https://web-fox-seven.vercel.app', // Specific origin, NOT '*'
+  origin: 'https://irahimedia.vercel.app', // Specific origin, NOT '*'
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
