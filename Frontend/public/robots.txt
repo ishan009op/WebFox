@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://irahimedia.vercel.app/sitemap.xml
