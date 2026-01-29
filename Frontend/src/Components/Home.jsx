@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
+
 import { motion } from "framer-motion";
 
 import Services from "./Services.jsx";
@@ -16,6 +18,29 @@ const Home = () => {
 
   return (
     <>
+    
+  <Helmet>
+    <title>Premium Brand Design & Visual Identity Services</title>
+
+    <meta
+      name="description"
+      content="We design premium brand identities, marketing creatives, and visual systems that help businesses stand out, build trust, and convert."
+    />
+
+    <meta
+      name="keywords"
+      content="brand design, visual identity, logo design, branding agency, marketing creatives"
+    />
+
+    {/* Open Graph (for WhatsApp, LinkedIn, etc.) */}
+    <meta property="og:title" content="Premium Brand Design & Visual Identity" />
+    <meta
+      property="og:description"
+      content="Designing brands that look premium, feel memorable, and convert."
+    />
+    <meta property="og:type" content="website" />
+  </Helmet>
+
       {/* ================= HERO SECTION ================= */}
      <section
   id="home"
