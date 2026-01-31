@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { motion } from "framer-motion";
-
+import {Clock} from 'lucide-react'
 import Services from "./Services.jsx";
 import UseScrollToHash from "./UseScrollToHash.js";
 import About from "./About.jsx";
@@ -18,11 +18,11 @@ const Home = () => {
   return (
     <>
       {/* ================= HERO SECTION ================= */}
-     <section
+     {/* <section
   id="home"
   className="relative w-full min-h-screen bg-white flex items-center px-6 md:px-12 lg:px-20 overflow-hidden"
 >
-  {/* ===== LOCKED CORNER GLOWS ===== */}
+
   <motion.div
     aria-hidden
     className="pointer-events-none absolute -top-28 -left-0 w-72 h-72 md:w-[400px] md:h-[400px] bg-gradient-to-br from-amber-400/30 to-green-400/30 rounded-full blur-[100px]"
@@ -36,9 +36,9 @@ const Home = () => {
     transition={{ repeat: Infinity, duration: 16, ease: "easeInOut" }}
   />
 
-  {/* ===== CONTENT ===== */}
+ 
   <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-    {/* LEFT TEXT */}
+
     <motion.div
       initial={{ opacity: 0, x: -50 }}
       animate={{ opacity: 1, x: 0 }}
@@ -73,14 +73,14 @@ const Home = () => {
       </div>
     </motion.div>
 
-    {/* RIGHT IMAGE */}
+    
     <motion.div
       className="relative flex justify-center lg:justify-end mt-10 lg:mt-0"
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.9, delay: 0.15 }}
     >
-      {/* Floating shapes only on large screens */}
+    
       <div className="hidden lg:block">
         <motion.div
           className="absolute -top-3 -left-1 w-12 h-12 bg-amber-400 rounded-full"
@@ -106,13 +106,13 @@ const Home = () => {
       />
     </motion.div>
   </div>
-</section>
+</section> */}
 
 
       {/* ================= OTHER SECTIONS ================= */}
-      <Services />
+      {/* <Services />
       <About />
-      <Contact />
+      <Contact /> */}
 
       {/* Contact Modal */}
       <ContactModal
@@ -120,6 +120,35 @@ const Home = () => {
         onClose={() => setOpen(false)}
         source={source}
       />
+
+
+
+
+ <section className="mx-auto my-20 max-w-5xl rounded-2xl border border-cyan-200/20 bg-cyan-950 px-6 py-16 text-center">
+      
+      {/* Badge */}
+      <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-yellow-400/15 px-4 py-1 text-sm font-semibold text-yellow-300">
+        <Clock className="h-4 w-4" />
+        Coming Soon
+      </span>
+
+      {/* Heading */}
+      <h2 className="mb-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        Something <span className="text-cyan-400">New</span> is Coming
+      </h2>
+
+      {/* Text */}
+      <p className="mx-auto max-w-xl text-base leading-relaxed text-cyan-100/80 sm:text-lg">
+        We’re working behind the scenes to launch something valuable for brands.
+        Clean design. Strong identity. Stay tuned.
+      </p>
+
+    </section>
+
+
+
+
+
     </>
   );
 };

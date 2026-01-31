@@ -24,8 +24,8 @@ const Header = () => {
   return (
     <>
       {/* ============== NAVBAR ============== */}
-      <div className="bg-white sticky top-0 z-50 shadow-md px-1 py-3 flex md:justify-between lg:px-5 justify-around items-center">
-        {/* Logo */}
+      {/* <div className="bg-white sticky top-0 z-50 shadow-md px-1 py-3 flex md:justify-between lg:px-5 justify-around items-center">
+        
         <img
           src="/irahi-logo (2).png"
           className="md:h-14 h-9 cursor-pointer"
@@ -33,7 +33,7 @@ const Header = () => {
           onClick={() => scrollToSection("#home")}
         />
 
-        {/* Menu */}
+     
         <div className="flex text-[10px] justify-center gap-3 md:text-base items-center md:gap-6">
           {menuItems.map((item) => (
             <li
@@ -45,7 +45,7 @@ const Header = () => {
             </li>
           ))}
 
-          {/* Get Started Button */}
+         
           <button
             onClick={() => {
               setSource("get-started");
@@ -56,9 +56,9 @@ const Header = () => {
             Get Started
           </button>
         </div>
-      </div>
+      </div> */}
 
-      {/* Contact Modal */}
+    
       <ContactModal open={open} onClose={() => setOpen(false)} source={source} />
     </>
   );

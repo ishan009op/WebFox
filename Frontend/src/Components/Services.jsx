@@ -112,56 +112,57 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="relative w-full py-16 px-4 md:px-10 bg-gray-50 overflow-hidden">
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8">
-        Our Services
-      </h2>
+    // <section id="services" className="relative w-full py-16 px-4 md:px-10 bg-gray-50 overflow-hidden">
+    //   <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-8">
+    //     Our Services
+    //   </h2>
 
-      <div
-        className="overflow-hidden cursor-grab"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        <div
-          className="flex gap-6"
-          style={{ transform: `translateX(${-offsetX}px)` }}
-          ref={containerRef}
-          onMouseDown={() => setPaused(true)}
-          onMouseUp={() => setPaused(false)}
-          onTouchStart={() => setPaused(true)}
-          onTouchEnd={() => setPaused(false)}
-        >
-          {infiniteServices.map((service, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg flex-shrink-0 w-96 cursor-pointer relative"
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-amber-400 rounded-t-xl" />
-              <h3 className="text-2xl font-bold text-gray-900 mb-3 mt-2">{service.title}</h3>
-              <p className="text-gray-700 text-sm mb-4">{service.description}</p>
-              <ul className="list-disc list-inside text-gray-800 space-y-1 text-sm">
-                {service.features.map((f, i) => (
-                  <li key={i}>{f}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
+    //   <div
+    //     className="overflow-hidden cursor-grab"
+    //     onMouseEnter={() => setPaused(true)}
+    //     onMouseLeave={() => setPaused(false)}
+    //   >
+    //     <div
+    //       className="flex gap-6"
+    //       style={{ transform: `translateX(${-offsetX}px)` }}
+    //       ref={containerRef}
+    //       onMouseDown={() => setPaused(true)}
+    //       onMouseUp={() => setPaused(false)}
+    //       onTouchStart={() => setPaused(true)}
+    //       onTouchEnd={() => setPaused(false)}
+    //     >
+    //       {infiniteServices.map((service, idx) => (
+    //         <div
+    //           key={idx}
+    //           className="bg-white rounded-3xl p-8 border border-gray-200 shadow-lg flex-shrink-0 w-96 cursor-pointer relative"
+    //         >
+    //           <div className="absolute top-0 left-0 w-full h-1 bg-amber-400 rounded-t-xl" />
+    //           <h3 className="text-2xl font-bold text-gray-900 mb-3 mt-2">{service.title}</h3>
+    //           <p className="text-gray-700 text-sm mb-4">{service.description}</p>
+    //           <ul className="list-disc list-inside text-gray-800 space-y-1 text-sm">
+    //             {service.features.map((f, i) => (
+    //               <li key={i}>{f}</li>
+    //             ))}
+    //           </ul>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>
 
-      {/* Dots */}
-      <div className="flex justify-center mt-6 gap-2">
-        {services.map((_, idx) => (
-          <div
-            key={idx}
-            className={`w-3 h-3 rounded-full transition-colors duration-300 cursor-pointer ${
-              activeDot === idx ? "bg-amber-400" : "bg-gray-300"
-            }`}
-            onClick={() => scrollToCard(idx)}
-          />
-        ))}
-      </div>
-    </section>
+    //   {/* Dots */}
+    //   <div className="flex justify-center mt-6 gap-2">
+    //     {services.map((_, idx) => (
+    //       <div
+    //         key={idx}
+    //         className={`w-3 h-3 rounded-full transition-colors duration-300 cursor-pointer ${
+    //           activeDot === idx ? "bg-amber-400" : "bg-gray-300"
+    //         }`}
+    //         onClick={() => scrollToCard(idx)}
+    //       />
+    //     ))}
+    //   </div>
+    // </section>
+    <></>
   );
 };
 
