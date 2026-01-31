@@ -57,15 +57,23 @@
 
   <body>
     <div id="root"></div>
-    <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "WebSite",
   "name": "Irahi Media",
   "url": "https://irahimedia.in",
-  "logo": "https://irahimedia.in/irahi-logo.png"
+  "publisher": {
+    "@type": "Organization",
+    "name": "Irahi Media",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://irahimedia.in/irahi-logo.png"
+    }
+  }
 }
 </script>
+
 
     <script type="module" src="/src/main.jsx"></script>
   </body>
